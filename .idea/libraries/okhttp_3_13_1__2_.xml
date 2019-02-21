@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="okhttp-3.13.1 (2)">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/okhttp-3.13.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/okhttputils-2_6_2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/okio-2.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tinify-1.5.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

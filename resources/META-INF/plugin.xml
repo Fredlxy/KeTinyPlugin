@@ -1,0 +1,31 @@
+<idea-plugin>
+    <id>com.your.company.unique.plugin.id</id>
+    <name>TinyPng</name>
+    <version>1.0</version>
+    <vendor email="liuyu020@lianjia.com" url="http://www.ke.com">贝壳找房</vendor>
+
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="173.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable instance="com.home.link.config.TinyPicConfigurable"/>
+        <applicationService serviceInterface="com.home.link.config.KeTinyPicPreference"
+                            serviceImplementation="com.home.link.config.KeTinyPicPreference"/>
+    </extensions>
+
+    <actions>
+        <action id="com.lianjia.TinyPic" class="com.home.link.action.TinyPicAction" text="Compress"
+                description="for compress image use TinyPNG">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl Q"/>
+        </action>
+    </actions>
+
+</idea-plugin>
