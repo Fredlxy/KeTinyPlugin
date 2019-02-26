@@ -11,7 +11,7 @@ package com.home.link.common;
  */
 public interface Constants {
 
-    String APP_NAME = "Tinify Picture";    // Plugin name
+    String APP_NAME = "TinifyPic";    // Plugin name
 
     String DISPLAY_GROUP_PROMPT = "Tinify Picture Prompt";
 

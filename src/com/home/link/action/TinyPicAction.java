@@ -1,13 +1,13 @@
 package com.home.link.action;
 
 import com.home.link.config.KeTinyPicPreference;
+import com.home.link.image.TinyCompressFilesBackgroundTask;
+import com.home.link.util.ComponentUtil;
 import com.home.link.util.StringUtil;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.tinify.Tinify;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -35,35 +35,10 @@ public class TinyPicAction extends AnAction {
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
-        String apiKey = ServiceManager.getService(KeTinyPicPreference.class).getApiKey();
-        System.out.println("TinyPicAction apiKey = " + apiKey);
 
-        if (!StringUtil.isNotEmpty(apiKey)) {
-            //弹出提示框，去申请一个apiKey值
-            return;
-        }
-
-        try {
-            if (imageUrls != null && imageUrls.size() > 0) {
-                //设置key值，每月只能压缩500张
-                Tinify.setKey(apiKey);
-                //循环压缩图片
-                for (int index = 0; index < imageUrls.size(); index++) {
-                    String url = imageUrls.get(index);
-                    Tinify.fromFile(url).toFile(url);
-                    sb.append("第").append(index + 1).append("张图片压缩成功\n")
-                            .append("       地址为").append(url).append("\n");
-                }
-                Messages.showMessageDialog(project, sb.toString(), "图片压缩结果", Messages.getInformationIcon());
-            }
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            sb.append("异常信息：").append(ex.getMessage());
-            Messages.showMessageDialog(project, sb.toString(), "图片压缩结果", Messages.getInformationIcon());
-        }
-
+        TinyCompressFilesBackgroundTask task = new TinyCompressFilesBackgroundTask(imageUrls,project,"TinyPic",true);
+        task.project = project;
+        task.runTask();
     }
 
     @Override
@@ -104,7 +79,7 @@ public class TinyPicAction extends AnAction {
             return false;
         }
         String ext = virtualFile.getExtension();
-        if (ext != null && (ext.startsWith("png") || ext.startsWith("jgp")
+        if (ext != null && (ext.startsWith("png") || ext.startsWith("jpg")
                 || ext.startsWith(".9") || ext.startsWith("jpeg"))) {
             return true;
         } else {

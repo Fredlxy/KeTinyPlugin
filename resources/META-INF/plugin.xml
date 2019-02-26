@@ -20,11 +20,35 @@
                             serviceImplementation="com.home.link.config.KeTinyPicPreference"/>
     </extensions>
 
+    <project-components>
+        <component>
+            <!-- Interface and implementation classes are the same -->
+            <implementation-class>com.home.link.ui.ProjectNotifyComponent</implementation-class>
+
+            <!-- If the "workspace" option is set "true", the component
+                 saves its state to the .iws file instead of the .ipr file.
+                 Note that the <option> element is used only if the component
+                 implements the JDOMExternalizable interface. Otherwise, the
+                 use of the <option> element takes no effect.  -->
+            <option name="workspace" value="true" />
+
+            <!-- If the "loadForDefaultProject" tag is present, the project component is instantiated also for the default project. -->
+            <!--<loadForDefaultProject/>-->
+        </component>
+    </project-components>
+
     <actions>
         <action id="com.lianjia.TinyPic" class="com.home.link.action.TinyPicAction" text="Compress"
                 description="for compress image use TinyPNG">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl Q"/>
+        </action>
+
+        <action id="com.home.link.action.TinyChooseFileCompressAction"
+                class="com.home.link.action.TinyChooseFileCompressAction"
+                text="Choose images to compress" description="选择图片并进行压缩">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt Q"/>
         </action>
     </actions>
 
