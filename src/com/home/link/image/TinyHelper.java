@@ -1,6 +1,7 @@
 package com.home.link.image;
 
 import com.home.link.config.KeTinyPicPreference;
+import com.intellij.ide.plugins.PluginManager;
 import com.tinify.Source;
 import com.tinify.Tinify;
 import org.jetbrains.annotations.NotNull;
@@ -15,32 +16,39 @@ public class TinyHelper {
 
         Source source = Tinify.fromFile(src.getAbsolutePath());
         source.toFile(des.getAbsolutePath());
-        //DefaultPreference.getInstance().updateKey(Tinify.key(), true, Tinify.compressionCount());
+        KeTinyPicPreference.getInstance().updateKey(Tinify.key(), true, Tinify.compressionCount());
     }
 
 
     public static boolean checkTiny() {
         int compressionsThisMonth = Tinify.compressionCount();
+        PluginManager.getLogger().info("当前apiKey compressionCount = " + compressionsThisMonth +
+                "  isTinyValid = " + KeTinyPicPreference.getInstance().isTinyValid());
+
+
         if (compressionsThisMonth < 500 && KeTinyPicPreference.getInstance().isTinyValid()) {
             Iterator var2 = KeTinyPicPreference.getInstance().getApiKeys().entrySet().iterator();
 
             while(var2.hasNext()) {
                 Map.Entry<String, ApiKeyBean> entry = (Map.Entry)var2.next();
                 if (entry.getValue().isValid()) {
-                    boolean valid = changeAPI(entry.getKey());
+                    boolean valid = changeApiKey(entry.getKey());
                     if (valid) {
                         return true;
                     }
+                    PluginManager.getLogger().info("updateKey " + entry.getKey() +" 无效");
                     KeTinyPicPreference.getInstance().updateKey(entry.getKey(), false, 0);
                 }
             }
+            PluginManager.getLogger().info("所有apiKey都非法，Tiny服务无效！" );
             KeTinyPicPreference.getInstance().setTiyValid(false);
         }
         return false;
     }
 
 
-    private static boolean changeAPI(String apiKey) {
+    private static boolean changeApiKey(String apiKey) {
+        PluginManager.getLogger().info("changeApiKey 为：" + apiKey );
         try {
             Tinify.setKey(apiKey);
             Tinify.validate();

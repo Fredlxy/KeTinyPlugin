@@ -16,7 +16,7 @@ public class ApiKeyInputGUI {
     private JList mJList;
     private JButton mDeleteButton;
     private KeTinyPicPreference mPrefence;
-    private DefaultListModel mListModel;
+    private DefaultListModel<String> mListModel;
 
     public JComponent create() {
         mPrefence = KeTinyPicPreference.getInstance();
@@ -26,10 +26,11 @@ public class ApiKeyInputGUI {
 
         this.displayApiKeys();
         this.mDeleteButton.addActionListener(actionEvent -> {
-            Map<String, ApiKeyBean> apiKeys = mPrefence.getApiKeys();
             int selectIndex = mJList.getSelectedIndex();
-            if(mListModel.size() > 1){
+            String selectedApiKey = mListModel.get(selectIndex);
+            if(!Constants.DEFAULT_API_KEY.equals(selectedApiKey)){
                 mListModel.remove(selectIndex);
+                mPrefence.getApiKeys().remove(selectedApiKey);
             }
         });
 
@@ -63,7 +64,7 @@ public class ApiKeyInputGUI {
         mJList.setSelectedIndex(0);
         mJList.setVisibleRowCount(10);
         mJList.addListSelectionListener(listSelectionEvent -> {
-            int selectIndex = mJList.getSelectedIndex();
+
         });
     }
 

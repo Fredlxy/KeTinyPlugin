@@ -44,7 +44,7 @@ public class TinyPicConfigurable implements SearchableConfigurable {
     }
 
     @Override
-    public void apply() throws ConfigurationException {
+    public void apply(){
         System.out.println("apply method is called");
         mRootGUI.apply();
     }

@@ -23,7 +23,6 @@ public class TinyCompressFilesBackgroundTask extends Task.Backgroundable {
 
     private List<ImageBean> imageBeans;
 
-    private Logger logger = PluginManager.getLogger();
     public TinyCompressFilesBackgroundTask(@Nullable List<String> imageBeans, @Nullable Project project, @Nls(capitalization = Nls.Capitalization.Title) @NotNull String title, boolean canBeCancelled) {
         super(project, title, canBeCancelled);
         this.imageBeans = ComponentUtil.covert2ImageBean(imageBeans);
@@ -34,21 +33,25 @@ public class TinyCompressFilesBackgroundTask extends Task.Backgroundable {
     public void run(@NotNull ProgressIndicator progressIndicator) {
 
        boolean isValid = TinyHelper.checkTiny();
-       if(!isValid){
+        PluginManager.getLogger().info("压缩前tiny 服务状态：  " + isValid);
+
+        if(!isValid){
            ComponentUtil.showNotification(project,NotificationType.ERROR,
                    "apiKey is valid",true);
-           return;
+            return;
        }
         //循环压缩图片
         try {
+            PluginManager.getLogger().info("........开始压缩........");
+
             for (int index = 0; index < imageBeans.size(); index++) {
+
                 ImageBean imageBean = imageBeans.get(index);
                 String url = imageBean.url;
                 //progressBar
                 progressIndicator.setText( "compress imageBeans:" + url);
-                progressIndicator.setFraction(10);
                 progressIndicator.setIndeterminate(false);
-
+                progressIndicator.setFraction(5);
                 //compress image
                 Tinify.fromFile(url).toFile(url);
                 File src = new File(url);
@@ -65,6 +68,8 @@ public class TinyCompressFilesBackgroundTask extends Task.Backgroundable {
                         info,false);
             }
             progressIndicator.stop();
+            PluginManager.getLogger().info("........压缩结束........");
+
             //弹出成功的通知
             ComponentUtil.showNotification(project,NotificationType.INFORMATION,
                     "图片压缩成功",true);

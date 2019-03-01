@@ -1,5 +1,6 @@
 package com.home.link.config;
 
+import com.home.link.common.Constants;
 import com.home.link.image.ApiKeyBean;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
@@ -81,12 +82,11 @@ public class KeTinyPicPreference implements PersistentStateComponent<KeTinyPicPr
     public static class KeyState {
         private Map<String, ApiKeyBean> apiKeys;
         private boolean isTinyValid;
-        private String defaultKey = "91vpw4Kz8lnqk7GtnmdWZdMvLLTjTjnX";
 
         public KeyState() {
             this.apiKeys = new HashMap();
             this.isTinyValid = true;
-            this.apiKeys.put("91vpw4Kz8lnqk7GtnmdWZdMvLLTjTjnX", new ApiKeyBean("91vpw4Kz8lnqk7GtnmdWZdMvLLTjTjnX", true, 0));
+            this.apiKeys.put(Constants.DEFAULT_API_KEY, new ApiKeyBean(Constants.DEFAULT_API_KEY, true, 0));
         }
     }
 }

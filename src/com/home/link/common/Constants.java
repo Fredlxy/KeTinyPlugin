@@ -11,7 +11,7 @@ package com.home.link.common;
  */
 public interface Constants {
 
-    String APP_NAME = "TinifyPic";    // Plugin name
+    String APP_NAME = "Key TinifyPic";    // Plugin name
 
     String DISPLAY_GROUP_PROMPT = "Tinify Picture Prompt";
 
@@ -21,4 +21,6 @@ public interface Constants {
     String HTML_LINK_SETTINGS = "<a href='" + HTML_DESCRIPTION_SETTINGS + "'>设置</a>";
 
     String LINK_TINY_PNG_DEVELOPER = "https://tinypng.com/developers";
+
+    String DEFAULT_API_KEY = "NHblSC4vZMwx1HYZQrZGKt8WFVjHLT25";
 }

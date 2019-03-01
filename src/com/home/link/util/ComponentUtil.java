@@ -103,11 +103,11 @@ public class ComponentUtil {
         }
     }
 
-
-     /* 返回byte的数据大小对应的文本
-	 * @param size
-	 * @return
-             */
+    /**
+     * 返回byte的数据大小对应的文本
+     * @param size
+     * @return
+     */
     public static String formatFileSize(long size) {
         DecimalFormat formater = new DecimalFormat("####.00");
         if (size < 1024) {
