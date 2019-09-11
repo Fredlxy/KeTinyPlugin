@@ -2,7 +2,8 @@
     <id>com.ke.link</id>
     <name>TinyPng</name>
     <version>1.0</version>
-    <vendor email="liuyu020@lianjia.com" url="http://www.ke.com">贝壳找房</vendor>
+    <description> provide compress image service with TinyPNG </description>
+    <vendor email="liuyu020@ke.com" url="http://www.ke.com">贝壳找房</vendor>
 
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
