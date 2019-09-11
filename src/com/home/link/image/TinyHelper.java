@@ -22,7 +22,7 @@ public class TinyHelper {
 
     public static boolean checkTiny() {
         int compressionsThisMonth = Tinify.compressionCount();
-        PluginManager.getLogger().info("当前apiKey compressionCount = " + compressionsThisMonth +
+        PluginManager.getLogger().info("apiKey compressionCount = " + compressionsThisMonth +
                 "  isTinyValid = " + KeTinyPicPreference.getInstance().isTinyValid());
 
 
@@ -36,11 +36,11 @@ public class TinyHelper {
                     if (valid) {
                         return true;
                     }
-                    PluginManager.getLogger().info("updateKey " + entry.getKey() +" 无效");
+                    PluginManager.getLogger().info("updateKey " + entry.getKey() +" invalid");
                     KeTinyPicPreference.getInstance().updateKey(entry.getKey(), false, 0);
                 }
             }
-            PluginManager.getLogger().info("所有apiKey都非法，Tiny服务无效！" );
+            PluginManager.getLogger().info("all apiKey value is invalid!" );
             KeTinyPicPreference.getInstance().setTiyValid(false);
         }
         return false;
@@ -48,7 +48,7 @@ public class TinyHelper {
 
 
     private static boolean changeApiKey(String apiKey) {
-        PluginManager.getLogger().info("changeApiKey 为：" + apiKey );
+        PluginManager.getLogger().info("changeApiKey is " + apiKey );
         try {
             Tinify.setKey(apiKey);
             Tinify.validate();

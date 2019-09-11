@@ -33,7 +33,7 @@ public class TinyCompressFilesBackgroundTask extends Task.Backgroundable {
     public void run(@NotNull ProgressIndicator progressIndicator) {
 
        boolean isValid = TinyHelper.checkTiny();
-        PluginManager.getLogger().info("压缩前tiny 服务状态：  " + isValid);
+        //PluginManager.getLogger().info("压缩前tiny 服务状态：  " + isValid);
 
         if(!isValid){
            ComponentUtil.showNotification(project,NotificationType.ERROR,
@@ -42,14 +42,14 @@ public class TinyCompressFilesBackgroundTask extends Task.Backgroundable {
        }
         //循环压缩图片
         try {
-            PluginManager.getLogger().info("........开始压缩........");
+            PluginManager.getLogger().info("........start compress........");
 
             for (int index = 0; index < imageBeans.size(); index++) {
 
                 ImageBean imageBean = imageBeans.get(index);
                 String url = imageBean.url;
                 //progressBar
-                progressIndicator.setText( "compress imageBeans:" + url);
+                progressIndicator.setText( "compress image " + url);
                 progressIndicator.setIndeterminate(false);
                 progressIndicator.setFraction(5);
                 //compress image
@@ -68,17 +68,17 @@ public class TinyCompressFilesBackgroundTask extends Task.Backgroundable {
                         info,false);
             }
             progressIndicator.stop();
-            PluginManager.getLogger().info("........压缩结束........");
+            PluginManager.getLogger().info("........compress finish........");
 
             //弹出成功的通知
             ComponentUtil.showNotification(project,NotificationType.INFORMATION,
-                    "图片压缩成功",true);
+                    "compress success!",true);
 
 
         } catch (Exception e) {
             e.printStackTrace();
             ComponentUtil.showNotification(project,NotificationType.ERROR,
-                    "图片压缩失败，error msg：" + e.getMessage(),true);
+                    "compress failure，error msg：" + e.getMessage(),true);
         }
 
     }

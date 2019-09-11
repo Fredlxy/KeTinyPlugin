@@ -91,7 +91,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="申请apikey？"/>
+          <text value="apply for an apikey？"/>
         </properties>
       </component>
     </children>
