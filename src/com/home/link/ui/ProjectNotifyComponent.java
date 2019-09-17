@@ -46,11 +46,11 @@ public class ProjectNotifyComponent implements ProjectComponent {
 
     @Override
     public void projectOpened() {
-        boolean isTinyValid = TinyHelper.checkTiny();
+        boolean isTinyValid = TinyHelper.checkTinyValid();
         PluginManager.getLogger().debug("tiny api valid = " + isTinyValid);
         if (!isTinyValid) {
-            String notificationContent = "current apiKey is invalid，please set ApiKey<br/>%s&nbsp;&nbsp;&nbsp;&nbsp;%s"
-                    .format(Constants.HTML_LINK_SETTINGS, Constants.HTML_LINK_IGNORE);
+            String notificationContent =
+                    String.format("current apiKey is invalid，please set your ApiKey<br/>%s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%s ",Constants.HTML_LINK_SETTINGS, Constants.HTML_LINK_IGNORE);
             Notification notification = new Notification(Constants.DISPLAY_GROUP_PROMPT,
                     Constants.APP_NAME, notificationContent, NotificationType.WARNING,
                     new NotificationListener.Adapter() {

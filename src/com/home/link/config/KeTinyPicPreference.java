@@ -46,47 +46,27 @@ public class KeTinyPicPreference implements PersistentStateComponent<KeTinyPicPr
         return ServiceManager.getService(KeTinyPicPreference.class);
     }
 
-    public KeyState getKeyState(){
-        if(mKeyState == null){
-            mKeyState = new KeyState();
-        }
-        return mKeyState;
-    }
-
     public Map<String,ApiKeyBean> getApiKeys() {
         return mKeyState.apiKeys;
     }
 
-    public boolean isTinyValid(){
-        return mKeyState.isTinyValid;
-    }
-
-    public void setTiyValid(boolean valid){
-        mKeyState.isTinyValid = valid;
-    }
-
-    public void updateKey(String key, boolean valid, int count) {
+    public void updateKey(String key, boolean valid) {
         ApiKeyBean bean = this.mKeyState.apiKeys.get(key);
         if (bean == null) {
-            bean = new ApiKeyBean(key, valid, count);
+            bean = new ApiKeyBean(key, valid);
         } else {
             bean.setValid(valid);
-            bean.setCompressCount(count);
         }
 
         this.mKeyState.apiKeys.put(key, bean);
     }
 
-
-
     public static class KeyState {
         private Map<String, ApiKeyBean> apiKeys;
-        private boolean isTinyValid;
 
         public KeyState() {
             this.apiKeys = new HashMap();
-            this.isTinyValid = true;
-            this.apiKeys.put(Constants.DEFAULT_API_KEY, new ApiKeyBean(Constants.DEFAULT_API_KEY, true, 0));
+            this.apiKeys.put(Constants.DEFAULT_API_KEY, new ApiKeyBean(Constants.DEFAULT_API_KEY, true));
         }
     }
 }

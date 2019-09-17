@@ -11,14 +11,14 @@ package com.home.link.common;
  */
 public interface Constants {
 
-    String APP_NAME = "TinifyPic";    // Plugin name
+    String APP_NAME = "TinyPng"; // Plugin name
 
-    String DISPLAY_GROUP_PROMPT = "Tinify Picture Prompt";
+    String DISPLAY_GROUP_PROMPT = "TinyPng Picture Prompt";
 
     String HTML_DESCRIPTION_IGNORE = "#ignore";
     String HTML_DESCRIPTION_SETTINGS = "#settings";
-    String HTML_LINK_IGNORE = "<a href='" + HTML_DESCRIPTION_IGNORE + "'>do not remind again</a>";
-    String HTML_LINK_SETTINGS = "<a href='" + HTML_DESCRIPTION_SETTINGS + "'>set</a>";
+    String HTML_LINK_IGNORE = "<a href='" + HTML_DESCRIPTION_IGNORE + "'> ignore </a>";
+    String HTML_LINK_SETTINGS = "<a href='" + HTML_DESCRIPTION_SETTINGS + "'> settings >></a>";
 
     String LINK_TINY_PNG_DEVELOPER = "https://tinypng.com/developers";
 

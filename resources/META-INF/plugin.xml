@@ -2,8 +2,8 @@
     <id>com.ke.link</id>
     <name>TinyPng</name>
     <version>1.0</version>
-    <description> provide compress image service with TinyPNG </description>
-    <vendor email="liuyu020@ke.com" url="http://www.ke.com">贝壳找房</vendor>
+    <description> provide compress image service with TinyPNG  in intellij idea</description>
+    <vendor email="1029457926@qq.com" url="https://github.com/Fredlxy/KeTinyPlugin/wiki">砺雪凝霜</vendor>
 
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
@@ -14,6 +14,14 @@
     <!-- uncomment to enable plugin in all products
     <depends>com.intellij.modules.lang</depends>
     -->
+    <change-notes>
+        <![CDATA[
+          <ul>
+           <li> Select one or more image with Right click to compress image</li>
+           <li> Click Tools -> choose image to compress  to compress images</li>
+          </ul>
+        ]]>
+    </change-notes>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable instance="com.home.link.config.TinyPicConfigurable"/>
@@ -40,14 +48,14 @@
 
     <actions>
         <action id="com.lianjia.TinyPic" class="com.home.link.action.TinyPicAction" text="Compress"
-                description="for compress image use TinyPNG">
+                description="for compress image use TinyPNG" icon="/META-INF/icons/ic_compress_image.png">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl Q"/>
         </action>
 
         <action id="com.home.link.action.TinyChooseFileCompressAction"
                 class="com.home.link.action.TinyChooseFileCompressAction"
-                text="Choose images to compress" description="选择图片并进行压缩">
+                text="Choose images to compress" description="选择图片并进行压缩" icon="/META-INF/icons/ic_compress_image.png">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt Q"/>
         </action>

@@ -28,7 +28,7 @@ public class TinyPicConfigurable implements SearchableConfigurable {
     @Nls(capitalization = Nls.Capitalization.Title)
     @Override
     public String getDisplayName() {
-        return "TinyPic";
+        return "TinyPng";
     }
 
     @Nullable

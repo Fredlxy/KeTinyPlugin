@@ -16,34 +16,31 @@ public class TinyHelper {
 
         Source source = Tinify.fromFile(src.getAbsolutePath());
         source.toFile(des.getAbsolutePath());
-        KeTinyPicPreference.getInstance().updateKey(Tinify.key(), true, Tinify.compressionCount());
+        KeTinyPicPreference.getInstance().updateKey(Tinify.key(), true);
     }
 
 
-    public static boolean checkTiny() {
-        int compressionsThisMonth = Tinify.compressionCount();
-        PluginManager.getLogger().info("apiKey compressionCount = " + compressionsThisMonth +
-                "  isTinyValid = " + KeTinyPicPreference.getInstance().isTinyValid());
+    public static boolean checkTinyValid() {
 
-
-        if (compressionsThisMonth < 500 && KeTinyPicPreference.getInstance().isTinyValid()) {
-            Iterator var2 = KeTinyPicPreference.getInstance().getApiKeys().entrySet().iterator();
-
-            while(var2.hasNext()) {
-                Map.Entry<String, ApiKeyBean> entry = (Map.Entry)var2.next();
-                if (entry.getValue().isValid()) {
-                    boolean valid = changeApiKey(entry.getKey());
-                    if (valid) {
-                        return true;
-                    }
-                    PluginManager.getLogger().info("updateKey " + entry.getKey() +" invalid");
-                    KeTinyPicPreference.getInstance().updateKey(entry.getKey(), false, 0);
-                }
-            }
-            PluginManager.getLogger().info("all apiKey value is invalid!" );
-            KeTinyPicPreference.getInstance().setTiyValid(false);
+        if(KeTinyPicPreference.getInstance() == null ){
+            return false;
         }
+        Map<String,ApiKeyBean> apiKeyMap = KeTinyPicPreference.getInstance().getApiKeys();
+        Iterator iterator = apiKeyMap.entrySet().iterator();
+        while(iterator.hasNext()) {
+            Map.Entry<String, ApiKeyBean> entry = (Map.Entry)iterator.next();
+            if (entry.getValue().isValid()) {
+                boolean valid = changeApiKey(entry.getKey());
+                if (valid) {
+                    return true;
+                }
+                PluginManager.getLogger().info("updateKey " + entry.getKey() +" invalid");
+                KeTinyPicPreference.getInstance().updateKey(entry.getKey(), false);
+            }
+        }
+        PluginManager.getLogger().info("all apiKey value is invalid!" );
         return false;
+
     }
 
 

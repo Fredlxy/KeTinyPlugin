@@ -4,7 +4,6 @@ import com.google.common.io.Files;
 import com.home.link.util.ComponentUtil;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.notification.NotificationType;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
@@ -32,12 +31,12 @@ public class TinyCompressFilesBackgroundTask extends Task.Backgroundable {
     @Override
     public void run(@NotNull ProgressIndicator progressIndicator) {
 
-       boolean isValid = TinyHelper.checkTiny();
+       boolean isValid = TinyHelper.checkTinyValid();
         //PluginManager.getLogger().info("压缩前tiny 服务状态：  " + isValid);
 
         if(!isValid){
            ComponentUtil.showNotification(project,NotificationType.ERROR,
-                   "apiKey is valid",true);
+                   "apiKey is invalid",true);
             return;
        }
         //循环压缩图片

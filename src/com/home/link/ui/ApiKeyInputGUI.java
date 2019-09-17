@@ -37,7 +37,8 @@ public class ApiKeyInputGUI {
         mAddButton.addActionListener(actionEvent -> {
             AddApiKeyDialog dialog = new AddApiKeyDialog();
             dialog.setOnActionListener(apiKey -> {
-                KeTinyPicPreference.getInstance().updateKey(apiKey,true,0);
+                KeTinyPicPreference.getInstance().updateKey(apiKey,true);
+
                 mListModel.add(0,apiKey);
                 mJList.setModel(mListModel);
             });
@@ -52,11 +53,9 @@ public class ApiKeyInputGUI {
     private void displayApiKeys() {
         mListModel = new DefaultListModel<String>();
         Map<String, ApiKeyBean> hashMap = mPrefence.getApiKeys();
-        if (mPrefence.isTinyValid()) {
-            for (String key : hashMap.keySet()) {
-                if (key != null) {
-                    mListModel.addElement(key);
-                }
+        for (String key : hashMap.keySet()) {
+            if (key != null) {
+                mListModel.addElement(key);
             }
         }
         mJList.setModel(mListModel);
@@ -71,7 +70,7 @@ public class ApiKeyInputGUI {
     public void addInputKey(String inputKey) {
         if (inputKey != null && inputKey.trim().length() > 0) {
             Map<String, ApiKeyBean> hashMap = mPrefence.getApiKeys();
-            hashMap.put(inputKey, new ApiKeyBean(inputKey, true, 0));
+            hashMap.put(inputKey, new ApiKeyBean(inputKey, true));
         }
     }
 

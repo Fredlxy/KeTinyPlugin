@@ -29,7 +29,7 @@ public class ApiKeyBean {
     }
 
 
-    public ApiKeyBean(String apiKey, boolean validate, int compressCount) {
+    public ApiKeyBean(String apiKey, boolean validate) {
         this.apiKey = apiKey;
         this.valid = validate;
         this.compressCount = compressCount;
