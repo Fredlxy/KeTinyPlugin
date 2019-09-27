@@ -1,6 +1,6 @@
 package com.home.link.image;
 
-import com.home.link.config.KeTinyPicPreference;
+import com.home.link.config.TinyPngPreference;
 import com.intellij.ide.plugins.PluginManager;
 import com.tinify.Source;
 import com.tinify.Tinify;
@@ -16,16 +16,16 @@ public class TinyHelper {
 
         Source source = Tinify.fromFile(src.getAbsolutePath());
         source.toFile(des.getAbsolutePath());
-        KeTinyPicPreference.getInstance().updateKey(Tinify.key(), true);
+        TinyPngPreference.getInstance().updateKey(Tinify.key(), true);
     }
 
 
     public static boolean checkTinyValid() {
 
-        if(KeTinyPicPreference.getInstance() == null ){
+        if(TinyPngPreference.getInstance() == null ){
             return false;
         }
-        Map<String,ApiKeyBean> apiKeyMap = KeTinyPicPreference.getInstance().getApiKeys();
+        Map<String,ApiKeyBean> apiKeyMap = TinyPngPreference.getInstance().getApiKeys();
         Iterator iterator = apiKeyMap.entrySet().iterator();
         while(iterator.hasNext()) {
             Map.Entry<String, ApiKeyBean> entry = (Map.Entry)iterator.next();
@@ -35,7 +35,7 @@ public class TinyHelper {
                     return true;
                 }
                 PluginManager.getLogger().info("updateKey " + entry.getKey() +" invalid");
-                KeTinyPicPreference.getInstance().updateKey(entry.getKey(), false);
+                TinyPngPreference.getInstance().updateKey(entry.getKey(), false);
             }
         }
         PluginManager.getLogger().info("all apiKey value is invalid!" );

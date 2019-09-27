@@ -1,11 +1,7 @@
 package com.home.link.action;
 
-import com.home.link.config.KeTinyPicPreference;
 import com.home.link.image.TinyCompressFilesBackgroundTask;
-import com.home.link.util.ComponentUtil;
-import com.home.link.util.StringUtil;
 import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +16,7 @@ import java.util.List;
  * 3、自动输入api，可以多个
  */
 
-public class TinyPicAction extends AnAction {
+public class TinyPngAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
@@ -36,7 +32,7 @@ public class TinyPicAction extends AnAction {
         }
 
 
-        TinyCompressFilesBackgroundTask task = new TinyCompressFilesBackgroundTask(imageUrls,project,"TinyPic",true);
+        TinyCompressFilesBackgroundTask task = new TinyCompressFilesBackgroundTask(imageUrls,project,"TinyPng",true);
         task.project = project;
         task.runTask();
     }

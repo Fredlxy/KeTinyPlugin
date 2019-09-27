@@ -10,7 +10,6 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,21 +18,35 @@ import java.util.Map;
  * more detail :http://corochann.com/intellij-plugin-development-introduction-persiststatecomponent-903.html
  */
 
-@State(name = "com.home.link.config.KeTinyPicPreference", storages = @Storage(value = "$APP_CONFIG$/LianjiaTinyPic.xml"))
-public class KeTinyPicPreference implements PersistentStateComponent<KeTinyPicPreference> {
+@State(name = "com.home.link.config.TinyPngPreference", storages = @Storage(value = "$APP_CONFIG$/KeTinyPng.xml"))
+public class TinyPngPreference implements PersistentStateComponent<TinyPngPreference> {
 
-    private KeyState mKeyState = new KeyState();
+    public KeyState keyState;
+
+
+    public KeyState getKeyState(){
+        if(keyState == null){
+            keyState = new KeyState();
+        }
+        return keyState;
+    }
+
+    public void setKeyState(KeyState state){
+        this.keyState = state;
+    }
+
+    public TinyPngPreference(){}
 
     @Nullable
     @Override
-    public KeTinyPicPreference getState() {
+    public TinyPngPreference getState() {
         //每次设置项被保存的时候调用
         return this;
     }
 
     @Override
-    public void loadState(@NotNull KeTinyPicPreference tinyPicPreference) {
-        XmlSerializerUtil.copyBean(tinyPicPreference, this);
+    public void loadState(@NotNull TinyPngPreference keyState) {
+        XmlSerializerUtil.copyBean(keyState, this);
     }
 
     /**
@@ -42,30 +55,32 @@ public class KeTinyPicPreference implements PersistentStateComponent<KeTinyPicPr
      * @return
      */
     @Nullable
-    public static KeTinyPicPreference getInstance() {
-        return ServiceManager.getService(KeTinyPicPreference.class);
+    public static TinyPngPreference getInstance() {
+
+        return ServiceManager.getService(TinyPngPreference.class);
     }
 
-    public Map<String,ApiKeyBean> getApiKeys() {
-        return mKeyState.apiKeys;
+    public Map<String, ApiKeyBean> getApiKeys() {
+        return getKeyState().apiKeys;
     }
 
     public void updateKey(String key, boolean valid) {
-        ApiKeyBean bean = this.mKeyState.apiKeys.get(key);
+
+        ApiKeyBean bean = this.getKeyState().apiKeys.get(key);
         if (bean == null) {
             bean = new ApiKeyBean(key, valid);
         } else {
             bean.setValid(valid);
         }
 
-        this.mKeyState.apiKeys.put(key, bean);
+        this.getKeyState().apiKeys.put(key, bean);
     }
 
     public static class KeyState {
-        private Map<String, ApiKeyBean> apiKeys;
+        public Map<String, ApiKeyBean> apiKeys;
 
         public KeyState() {
-            this.apiKeys = new HashMap();
+            this.apiKeys = new HashMap<>();
             this.apiKeys.put(Constants.DEFAULT_API_KEY, new ApiKeyBean(Constants.DEFAULT_API_KEY, true));
         }
     }

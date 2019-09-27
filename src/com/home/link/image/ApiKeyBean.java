@@ -28,6 +28,7 @@ public class ApiKeyBean {
         return compressCount;
     }
 
+    public ApiKeyBean(){}
 
     public ApiKeyBean(String apiKey, boolean validate) {
         this.apiKey = apiKey;

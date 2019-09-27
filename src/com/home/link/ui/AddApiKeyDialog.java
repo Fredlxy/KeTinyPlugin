@@ -1,6 +1,5 @@
 package com.home.link.ui;
 
-import com.home.link.config.KeTinyPicPreference;
 import com.home.link.itf.OnDialogActionListener;
 import com.home.link.util.StringUtil;
 

@@ -1,7 +1,7 @@
 package com.home.link.ui;
 
 import com.home.link.common.Constants;
-import com.home.link.config.KeTinyPicPreference;
+import com.home.link.config.TinyPngPreference;
 import com.home.link.image.ApiKeyBean;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.ui.components.labels.LinkLabel;
@@ -15,11 +15,11 @@ public class ApiKeyInputGUI {
     private LinkLabel<String> mApiKeyLink;
     private JList mJList;
     private JButton mDeleteButton;
-    private KeTinyPicPreference mPrefence;
+    private TinyPngPreference mPrefence;
     private DefaultListModel<String> mListModel;
 
     public JComponent create() {
-        mPrefence = KeTinyPicPreference.getInstance();
+        mPrefence = TinyPngPreference.getInstance();
         mApiKeyLink.setListener((linkLabel, o) -> {
             BrowserUtil.browse(Constants.LINK_TINY_PNG_DEVELOPER);
         }, "");
@@ -37,7 +37,7 @@ public class ApiKeyInputGUI {
         mAddButton.addActionListener(actionEvent -> {
             AddApiKeyDialog dialog = new AddApiKeyDialog();
             dialog.setOnActionListener(apiKey -> {
-                KeTinyPicPreference.getInstance().updateKey(apiKey,true);
+                mPrefence.updateKey(apiKey,true);
 
                 mListModel.add(0,apiKey);
                 mJList.setModel(mListModel);

@@ -1,8 +1,7 @@
 package com.home.link.ui;
 
 import com.home.link.common.Constants;
-import com.home.link.config.KeTinyPicPreference;
-import com.home.link.config.TinyPicConfigurable;
+import com.home.link.config.TinyPngConfigurable;
 import com.home.link.image.TinyHelper;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.ide.util.PropertiesComponent;
@@ -17,7 +16,6 @@ import javax.swing.event.HyperlinkEvent;
 
 public class ProjectNotifyComponent implements ProjectComponent {
 
-    private KeTinyPicPreference preferences;
 
     private Project mProject;
 
@@ -31,16 +29,6 @@ public class ProjectNotifyComponent implements ProjectComponent {
     @Override
     public String getComponentName() {
         return "com.home.link.ui.ProjectNotifyComponent";
-    }
-
-    @Override
-    public void initComponent() {
-        preferences = KeTinyPicPreference.getInstance();
-    }
-
-    @Override
-    public void disposeComponent() {
-
     }
 
 
@@ -59,7 +47,7 @@ public class ProjectNotifyComponent implements ProjectComponent {
                             notification.expire();
                             switch (hyperlinkEvent.getDescription()) {
                                 case Constants.HTML_DESCRIPTION_SETTINGS:
-                                    TinyPicConfigurable.showSettingsDialog(mProject);
+                                    TinyPngConfigurable.showSettingsDialog(mProject);
                                     break;
                                 case Constants.HTML_DESCRIPTION_IGNORE:
                                     PropertiesComponent.getInstance().setValue(PROP_PROMPT_SETTINGS_IGNORE, true);

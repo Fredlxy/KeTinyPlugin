@@ -78,7 +78,7 @@ public class ComponentUtil {
 
 
     public static List<String> selectFiles(List<VirtualFile> virtualFiles) {
-        List<String> data = new ArrayList();
+        List<String> data = new ArrayList<>();
         Iterator it = virtualFiles.iterator();
 
         while(true) {
@@ -95,7 +95,9 @@ public class ComponentUtil {
                         }
                     }
                 } else {
-                    data.add(virtualFile.getCanonicalPath());
+                    if(virtualFile !=  null){
+                        data.add(virtualFile.getCanonicalPath());
+                    }
                 }
             }
 

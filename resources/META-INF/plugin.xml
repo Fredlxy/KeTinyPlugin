@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.ke.link</id>
     <name>TinyPng</name>
-    <version>1.0</version>
+    <version>1.3</version>
     <description> provide compress image service with TinyPNG  in intellij idea</description>
     <vendor email="1029457926@qq.com" url="https://github.com/Fredlxy/KeTinyPlugin/wiki">砺雪凝霜</vendor>
 
@@ -19,14 +19,15 @@
           <ul>
            <li> Select one or more image with Right click to compress image</li>
            <li> Click Tools -> choose image to compress  to compress images</li>
+           <li> Multiple apiKeys you can input, don't worry service stop</li>
           </ul>
         ]]>
     </change-notes>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationConfigurable instance="com.home.link.config.TinyPicConfigurable"/>
-        <applicationService serviceInterface="com.home.link.config.KeTinyPicPreference"
-                            serviceImplementation="com.home.link.config.KeTinyPicPreference"/>
+        <applicationConfigurable instance="com.home.link.config.TinyPngConfigurable"/>
+        <applicationService serviceInterface="com.home.link.config.TinyPngPreference"
+                            serviceImplementation="com.home.link.config.TinyPngPreference"/>
     </extensions>
 
     <project-components>
@@ -47,7 +48,7 @@
     </project-components>
 
     <actions>
-        <action id="com.lianjia.TinyPic" class="com.home.link.action.TinyPicAction" text="Compress"
+        <action id="com.lianjia.TinyPng" class="com.home.link.action.TinyPngAction" text="Compress"
                 description="for compress image use TinyPNG" icon="/META-INF/icons/ic_compress_image.png">
             <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl Q"/>
